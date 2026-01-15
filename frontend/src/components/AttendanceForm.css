@@ -1,0 +1,110 @@
+.attendance-form-container {
+  width: 100%;
+}
+
+.attendance-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.required {
+  color: #d32f2f;
+}
+
+.form-input,
+.form-select {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #1976d2;
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.1);
+}
+
+.form-input::placeholder {
+  color: #999;
+}
+
+.submit-button {
+  padding: 0.875rem 1.5rem;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 0.5rem;
+}
+
+.submit-button:hover:not(:disabled) {
+  background-color: #1565c0;
+}
+
+.submit-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.message {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: 4px;
+  border-left: 4px solid;
+}
+
+.message.success {
+  background-color: #e8f5e9;
+  border-color: #4caf50;
+  color: #2e7d32;
+}
+
+.message.clarification {
+  background-color: #fff3e0;
+  border-color: #ff9800;
+  color: #e65100;
+}
+
+.message.error {
+  background-color: #ffebee;
+  border-color: #f44336;
+  color: #c62828;
+}
+
+.message-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.message-icon {
+  font-size: 1.25rem;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.message p {
+  margin: 0;
+  line-height: 1.5;
+}
