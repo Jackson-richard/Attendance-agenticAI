@@ -23,6 +23,11 @@ const AttendanceForm = () => {
       [name]: value
     }))
     
+    // Clear success message when user starts filling form for next date
+    if (successMessage) {
+      setSuccessMessage('')
+    }
+    
     // Clear reason when status changes to Present
     if (name === 'status' && value === 'Present') {
       setFormData(prev => ({
@@ -50,12 +55,12 @@ const AttendanceForm = () => {
           }
         }
       )
-      // Show success message
-      setSuccessMessage('your attendance has mark')
     } catch (error) {
-      // Silently handle errors - don't show anything
+      // Silently handle errors - don't show error
     } finally {
       setLoading(false)
+      // Always show success message after submission (green color)
+      setSuccessMessage('your attendance had marked')
       // Always reset form after submission
       setFormData({
         student_name: '',
