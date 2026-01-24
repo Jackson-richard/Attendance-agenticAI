@@ -14,6 +14,7 @@ const AttendanceForm = () => {
   })
 
   const [loading, setLoading] = useState(false)
+  const [successMessage, setSuccessMessage] = useState('')
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -34,6 +35,7 @@ const AttendanceForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
+    setSuccessMessage('')
 
     try {
       await axios.post(
@@ -48,6 +50,8 @@ const AttendanceForm = () => {
           }
         }
       )
+      // Show success message
+      setSuccessMessage('your attendance has mark')
     } catch (error) {
       // Silently handle errors - don't show anything
     } finally {
@@ -158,6 +162,15 @@ const AttendanceForm = () => {
           {loading ? 'Submitting...' : 'Submit Attendance'}
         </button>
       </form>
+
+      {successMessage && (
+        <div className="message success">
+          <div className="message-content">
+            <span className="message-icon">✓</span>
+            <p>{successMessage}</p>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
