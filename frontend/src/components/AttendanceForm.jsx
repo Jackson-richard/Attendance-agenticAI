@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import axios from 'axios'
 import './AttendanceForm.css'
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL
+const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY
 
 const AttendanceForm = () => {
   const [formData, setFormData] = useState({
@@ -12,8 +14,6 @@ const AttendanceForm = () => {
   })
 
   const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState(null)
-  const [messageType, setMessageType] = useState(null) // 'success', 'clarification', 'error'
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -34,40 +34,32 @@ const AttendanceForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
-    setMessage(null)
-    setMessageType(null)
 
     try {
-      const response = await axios.post('/api/attendance', formData, {
-        headers: {
-          'Content-Type': 'application/json'
+      await axios.post(
+        `${import.meta.env.VITE_SUPABASE_URL}/rest/v1/attendance`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+            Prefer: 'return=representation'
+          }
         }
-      })
-
-      if (response.data.clarification_question) {
-        setMessageType('clarification')
-        setMessage(response.data.clarification_question)
-      } else if (response.data.confirmation_message) {
-        setMessageType('success')
-        setMessage(response.data.confirmation_message)
-        // Reset form after successful submission
-        setFormData({
-          student_name: '',
-          register_number: '',
-          date: new Date().toISOString().split('T')[0],
-          status: 'Present',
-          reason: ''
-        })
-      }
-    } catch (error) {
-      setMessageType('error')
-      setMessage(
-        error.response?.data?.detail || 
-        error.message || 
-        'An error occurred while submitting attendance'
       )
+    } catch (error) {
+      // Silently handle errors - don't show anything
     } finally {
       setLoading(false)
+      // Always reset form after submission
+      setFormData({
+        student_name: '',
+        register_number: '',
+        date: new Date().toISOString().split('T')[0],
+        status: 'Present',
+        reason: ''
+      })
     }
   }
 
@@ -166,17 +158,6 @@ const AttendanceForm = () => {
           {loading ? 'Submitting...' : 'Submit Attendance'}
         </button>
       </form>
-
-      {message && (
-        <div className={`message ${messageType}`}>
-          <div className="message-content">
-            {messageType === 'success' && <span className="message-icon">✓</span>}
-            {messageType === 'clarification' && <span className="message-icon">?</span>}
-            {messageType === 'error' && <span className="message-icon">✗</span>}
-            <p>{message}</p>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
