@@ -23,7 +23,6 @@ const AttendanceForm = () => {
       [name]: value
     }))
     
-    // Clear success message when user starts filling form for next date
     if (successMessage) {
       setSuccessMessage('')
     }
