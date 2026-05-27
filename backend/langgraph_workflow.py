@@ -24,7 +24,6 @@ def router_node(state: AttendanceState) -> AttendanceState:
     """Routes to appropriate attendance node based on status"""
     status = state.get("status", "").lower()
     
-    # Validate status
     valid_statuses = ["present", "absent"]
     if status not in valid_statuses:
         return {
