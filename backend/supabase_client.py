@@ -17,7 +17,6 @@ def get_supabase_client():
             "Please create a .env file in the backend directory with these values."
         )
     
-    # Clean and validate URL
     supabase_url = supabase_url.strip()
     supabase_key = supabase_key.strip()
     
