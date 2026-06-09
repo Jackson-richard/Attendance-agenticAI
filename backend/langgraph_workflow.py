@@ -68,7 +68,6 @@ def present_node(state: AttendanceState) -> AttendanceState:
             "is_complete": False
         }
     
-    # Store attendance
     try:
         store_attendance(
             student_name=state["student_name"],
