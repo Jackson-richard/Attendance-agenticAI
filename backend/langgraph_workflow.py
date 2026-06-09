@@ -191,7 +191,6 @@ def route_after_router(state: AttendanceState) -> str:
 
 workflow = StateGraph(AttendanceState)
 
-# Add nodes
 workflow.add_node("start_node", start_node)
 workflow.add_node("router_node", router_node)
 workflow.add_node("present_node", present_node)
