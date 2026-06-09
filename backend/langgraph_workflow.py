@@ -145,8 +145,7 @@ def absent_node(state: AttendanceState) -> AttendanceState:
             "clarification_question": error_msg,
             "is_complete": False
         }
-    
-    # Store attendance
+   
     try:
         store_attendance(
             student_name=state["student_name"],
