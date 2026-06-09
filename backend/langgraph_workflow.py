@@ -190,7 +190,6 @@ def route_after_router(state: AttendanceState) -> str:
     return status_map.get(status, END)
 
 
-# Build the graph
 workflow = StateGraph(AttendanceState)
 
 # Add nodes
